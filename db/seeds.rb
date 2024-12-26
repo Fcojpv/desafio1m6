@@ -7,3 +7,29 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+
+puts "Limpiando la base de datos..."
+Movie.destroy_all
+Client.destroy_all
+
+
+
+5.times do
+  Client.create!(
+    name: Faker::Name.name,
+    email: Faker::Internet.email
+  )
+end
+puts "Clientes creados: #{Client.count}"
+
+
+10.times do
+  Movie.create!(
+    name: Faker::Movie.title,
+    description: Faker::Movie.quote
+  )
+end
+puts "Películas creadas: #{Movie.count}"
+
+

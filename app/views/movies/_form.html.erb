@@ -1,8 +1,7 @@
 <%= form_with(model: movie) do |form| %>
   <% if movie.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h4><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h4>
       <ul>
         <% movie.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,17 +10,23 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <%= form.label :name, "Nombre", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.textarea :description %>
+  <div class="mb-3">
+    <%= form.label :description, "Descripción", class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.label :client_id, "Cliente", class: "form-label" %>
+    <%= form.collection_select :client_id, Client.all, :id, :name, { prompt: "Seleccionar cliente" }, { class: "form-select" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "Guardar", class: "btn btn-primary" %>
+    <%= link_to "Cancelar", movies_path, class: "btn btn-secondary" %>
   </div>
 <% end %>

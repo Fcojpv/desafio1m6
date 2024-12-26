@@ -1,16 +1,39 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Clients" %>
+<div class="container">
+  <h1 class="mb-4">Clientes</h1>
 
-<h1>Clients</h1>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Película Arrendada</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @clients.each do |client| %>
+          <tr>
+            <td><%= client.name %></td>
+            <td><%= client.email %></td>
+            <td>
+              <% if client.movie %>
+                <%= client.movie.name %>
+              <% else %>
+                <span class="text-muted">Sin arriendos</span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "Ver", client, class: "btn btn-sm btn-info" %>
+              <%= link_to "Editar", edit_client_path(client), class: "btn btn-sm btn-warning" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<div id="clients">
-  <% @clients.each do |client| %>
-    <%= render client %>
-    <p>
-      <%= link_to "Show this client", client %>
-    </p>
-  <% end %>
+  <%= link_to "Nuevo Cliente", new_client_path, class: "btn btn-primary" %>
 </div>
-
-<%= link_to "New client", new_client_path %>

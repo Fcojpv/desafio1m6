@@ -1,16 +1,39 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Movies" %>
+<div class="container">
+  <h1 class="mb-4">Películas</h1>
 
-<h1>Movies</h1>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Cliente Asignado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+            <td><%= movie.name %></td>
+            <td><%= movie.description %></td>
+            <td>
+              <% if movie.client %>
+                <%= movie.client.name %>
+              <% else %>
+                <span class="text-muted">Sin asignar</span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "Ver", movie, class: "btn btn-sm btn-info" %>
+              <%= link_to "Editar", edit_movie_path(movie), class: "btn btn-sm btn-warning" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<div id="movies">
-  <% @movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
-  <% end %>
+  <%= link_to "Nueva Película", new_movie_path, class: "btn btn-primary" %>
 </div>
-
-<%= link_to "New movie", new_movie_path %>
