@@ -26,9 +26,31 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand" href="/">BlockBuster</a>
-        <div class="navbar-nav">
-          <%= link_to "Películas", movies_path, class: "nav-link" %>
-          <%= link_to "Clientes", clients_path, class: "nav-link" %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Películas
+              </a>
+              <ul class="dropdown-menu">
+                <%= link_to "Ver todas", movies_path, class: "dropdown-item" %>
+                <%= link_to "Nueva película", new_movie_path, class: "dropdown-item" %>
+                <%= link_to "Asignar película", movies_path, class: "dropdown-item" %>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Clientes
+              </a>
+              <ul class="dropdown-menu">
+                <%= link_to "Ver todos", clients_path, class: "dropdown-item" %>
+                <%= link_to "Nuevo cliente", new_client_path, class: "dropdown-item" %>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -39,5 +61,16 @@
     
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Initialize Bootstrap components -->
+    <script>
+      document.addEventListener("turbo:load", function() {
+        // Initialize all dropdowns
+        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+        var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+          return new bootstrap.Dropdown(dropdownToggleEl)
+        })
+      });
+    </script>
   </body>
 </html>

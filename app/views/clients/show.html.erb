@@ -1,10 +1,29 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @client %>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Detalles del Cliente</h2>
 
-<div>
-  <%= link_to "Edit this client", edit_client_path(@client) %> |
-  <%= link_to "Back to clients", clients_path %>
+      <div class="mb-3">
+        <strong>Nombre:</strong>
+        <%= @client.name %>
+      </div>
 
-  <%= button_to "Destroy this client", @client, method: :delete %>
+      <div class="mb-3">
+        <strong>Email:</strong>
+        <%= @client.email %>
+      </div>
+
+      <div class="mb-3">
+        <strong>Película Arrendada:</strong>
+        <%= @client.movie ? @client.movie.name : "Sin arriendos" %>
+      </div>
+
+      <div class="mt-4">
+        <%= link_to "Editar", edit_client_path(@client), class: "btn btn-warning" %>
+        <%= link_to "Volver", clients_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
 </div>
